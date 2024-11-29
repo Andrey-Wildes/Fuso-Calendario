@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Fuso-Calendário</title>
+</head>
+
+<body>
+    <div align="center">
+        <h1>Fuso-Calendário</h1>
+        <label>Tempo de Órbita (segundos):</label>
+        <input type="number" id="o" name="o">
+        <label>Tempo de Rotação Sideral (segundos):</label>
+        <input type="number" id="rs" name="rs">
+        <button onclick="converter()">Converter e Calcular</button><br><br>
+        <label>Tempo de Rotação Orbital (segundos):</label>
+        <input type="number" id="ro" name="ro">
+        <button onclick="calendario()">Apenas Calcular</button>
+        <p id="demo"></p>
+    </div>
+</body>
+<script>
+    function converter() {
+        let o = parseInt(document.getElementById("o").value); // Tempo de órbita
+        let rs = parseInt(document.getElementById("rs").value); // Tempo de rotação sideral
+        let nr = o / rs; // Número de rotações
+        let f = rs / (nr - 1); // Fatorial
+        let ro = f * nr; // Rotação orbital
+
+        // Exibindo os resultados
+        document.getElementById("demo").innerHTML = "A Órbita dura " + o + " segundos." + "<br>" +
+            "A Rotação Sideral dura " + rs + " segundos." + "<br>" +
+            "A Rotação Orbital dura " + ro + " segundos." + "<br>" +
+            "Uma Órbita possui " + nr + " Rotações." + "<br>" +
+            "O Fatorial é " + f + ". (???)";
+        calendario();
+    }
+
+    function calendario() {
+        let nda = nr - 1;
+        let nde = (nr - 1) / 4;
+        let ndm = (nr - 1) / 12;
+        let ds = ro;
+        let dm = ds / 60;
+        let dh = dm / 60;
+        let as = o;
+        let am = as / 60;
+        let ah = am / 60;
+        let es = as / 4;
+        let em = es / 60;
+        let eh = em / 60;
+        let ms = es / 3;
+        let mm = ms / 60;
+        let mh = mm / 60;
+
+        // Exibindo os resultados
+        document.getElementById("demo").innerHTML += "<br>" +
+            "O Dia dura " + ds + " segundos, ou " + dm + " minutos, ou " + dh + " horas." + "<br>" +
+            "O Ano dura " + as + " segundos, ou " + am + " minutos, ou " + ah + " horas. O Ano possui " + nda + " Dias." + "<br>" +
+            "A Estação dura " + es + " segundos, ou " + em + " minutos, ou " + eh + " horas. O Ano possui " + nde + " Dias." + "<br>" +
+            "O Mês dura " + ms + " segundos, ou " + mm + " minutos, ou " + mh + " horas. O Ano possui " + ndm + " Dias.";
+    }
+
+</script>
+
+</html>
